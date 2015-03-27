@@ -7,21 +7,21 @@
     Changeset:
     %ul
       - @diff.cs.axiom_changes.each do |change|
-        %li= change.to_string
-        %pre
-          = change.axiom.individual.toStringID if change.axiom.respond_to? :individual
+        %li
+          %code&= change.toString
+
     Entities
     %pre
-      = @diff.entities
+      = @diff.entities.map(&:iri).map(&:to_string)
     New Entities
     %pre
-      = @diff.new_entities
+      = @diff.new_entities.map(&:iri).map(&:to_string)
     Modified Entities
     %pre
-      = @diff.modified_entities
+      = @diff.modified_entities.map(&:iri).map(&:to_string)
     Removed Entities
     %pre
-      = @diff.removed_entities
+      = @diff.removed_entities.map(&:iri).map(&:to_string)
   .col-lg-6
     %pre
 

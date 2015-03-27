@@ -23,8 +23,8 @@ class DiffService
   end
 
   def load_ontologies
-    @owl1 = OntologyUtils.load_ontology(@source1);
-    @owl2 = OntologyUtils.load_ontology(@source2);
+    @owl1 = OntologyUtils.loadOntology(@source1);
+    @owl2 = OntologyUtils.loadOntology(@source2);
   end
 
   def changeset
@@ -37,8 +37,11 @@ class DiffService
     @removed_entities = HashSet.new
     @modified_entities = HashSet.new
     @cs.accept(EntityCollector.new(@entities,HashSet.new))
-    EntityClassifier.new(@owl1, @owl2, @entities, @new_entities,
-           @removed_entities, @modified_entities);
+    @format1 = @owl1.getOWLOntologyManager.getOntologyFormat @owl1
+    @format2 = @owl2.getOWLOntologyManager.getOntologyFormat @owl2
+
+    EntityClassifier.new(@owl1, @owl2, @entities.to_java, @new_entities.to_java,
+           @removed_entities.to_java, @modified_entities.to_java);
 
   end
 
