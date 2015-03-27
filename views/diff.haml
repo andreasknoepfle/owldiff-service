@@ -1,0 +1,31 @@
+.row
+  - if @diff.binary_identical?
+    .col-lg-12
+      .alert.alert-success(role="alert")
+        The files are binary identical.
+  - else
+    Changeset:
+    %ul
+      - @diff.cs.axiom_changes.each do |change|
+        %li= change.to_string
+        %pre
+          = change.axiom.individual.toStringID if change.axiom.respond_to? :individual
+    Entities
+    %pre
+      = @diff.entities
+    New Entities
+    %pre
+      = @diff.new_entities
+    Modified Entities
+    %pre
+      = @diff.modified_entities
+    Removed Entities
+    %pre
+      = @diff.removed_entities
+  .col-lg-6
+    %pre
+
+      &= @o1.read
+  .col-lg-6
+    %pre
+      &= @o2.read
