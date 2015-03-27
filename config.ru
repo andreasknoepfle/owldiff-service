@@ -1,6 +1,6 @@
 #\ -s puma
 # Require the necessary init.rb file
-require 'init'
+require 'app'
 
 set :run, false
 set :environment, :production
