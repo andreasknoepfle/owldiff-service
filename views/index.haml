@@ -3,9 +3,9 @@
     .well
       %form(action="/diff")
         .form-group
-          %label{:for => "exampleInputEmail1"} URL 1
+          %label{:for => "exampleInputEmail1"} URL 1 (Parent)
           %input#owl1.form-control(placeholder="http://example.com/testv1.owl" name="owl1_url")
         .form-group
-          %label{:for => "exampleInputPassword1"} URL 2
+          %label{:for => "exampleInputPassword1"} URL 2 (Child)
           %input#owl2.form-control(placeholder="http://example.com/testv2.owl" name="owl2_url")
         %button.btn.btn-default(type="submit") Compare

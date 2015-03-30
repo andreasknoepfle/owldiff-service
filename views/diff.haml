@@ -4,24 +4,35 @@
       .alert.alert-success(role="alert")
         The files are binary identical.
   - else
-    Changeset:
-    %ul
-      - @diff.cs.axiom_changes.each do |change|
-        %li
-          %code&= change.toString
-
-    Entities
-    %pre
-      = @diff.entities.map(&:iri).map(&:to_string)
-    New Entities
-    %pre
-      = @diff.new_entities.map(&:iri).map(&:to_string)
-    Modified Entities
-    %pre
-      = @diff.modified_entities.map(&:iri).map(&:to_string)
-    Removed Entities
-    %pre
-      = @diff.removed_entities.map(&:iri).map(&:to_string)
+    .col-lg-6
+      %h2 Changes
+      - OntologyChange::TYPES.each do |change_type|
+        %h3= change_type.to_s
+        - @diff.changed_axioms.select{|change| change.type == change_type}.each do |change|
+          %span.label{}
+            &= change.value
+    .col-lg-6
+      Entities
+      %ul
+        - @diff.entities.each do |entity|
+          %li
+            = ShortFormService.shorten entity
+      New Entities
+      %ul
+        = @diff.new_entities.each do |entity|
+          %li
+            = ShortFormService.shorten entity
+      Modified Entities
+      %ul
+        = @diff.modified_entities.each do |entity|
+          %li
+            = ShortFormService.shorten entity
+      Removed Entities
+      %ul
+        = @diff.removed_entities.each do |entity|
+          %li
+            = ShortFormService.shorten entity
+.row
   .col-lg-6
     %pre
 

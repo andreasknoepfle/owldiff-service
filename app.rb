@@ -18,7 +18,7 @@ get '/diff' do
 
   @o1 = DownloadService.download_url(params[:owl1_url])
   @o2 = DownloadService.download_url(params[:owl2_url])
-  @diff = DiffService.new @o1.path, @o2.path
-  @diff.changeset
+  @diff = OntologyDiff.new(@o1.path, @o2.path)
+
   haml :diff
 end
