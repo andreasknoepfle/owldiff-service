@@ -12,7 +12,7 @@ LABEL_TEXT_MAPPING = {
   ontology_id: "Ontology ID Changes",
   import: "Import Changes",
   anotation_data: "Annotation Data Changes",
-  axiom: "Axom Changes"
+  axiom: "Axiom Changes"
 }
 
 helpers do
