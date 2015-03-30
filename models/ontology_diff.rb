@@ -34,8 +34,24 @@ class OntologyDiff
     prefixes.to_hash
   end
 
-  def changed_axioms
-    @cs.axiom_changes.map do |change|
+  OntologyChange::SET_TYPES.each do |type|
+    define_method("#{type}_changes") do
+      @cs.send("#{type}_changes").map do |change|
+        ChangeMappingService.map change
+      end
+    end
+  end
+
+  OntologyChange::SINGLE_TYPES.each do |type|
+    define_method("#{type}_change") do
+      change = @cs.send("#{type}_change")
+      change ? ChangeMappingService.map(change) : nil
+    end
+  end
+
+
+  def changed_prefixes
+    @cs.prefix_changes.map do |change|
       ChangeMappingService.map change
     end
   end

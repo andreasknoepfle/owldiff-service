@@ -1,7 +1,8 @@
 class OntologyChange
   attr_accessor :value, :type, :action, :data
   ACTIONS = [:added,:removed,:renamed,:modified]
-  TYPES = [:ontology_format,:prefix,:ontology_id,:import,:anotation_data,:axiom]
+  SET_TYPES = [:prefix,:import,:annotation,:axiom]
+  SINGLE_TYPES = [:format,:ontology_id]
 
   def initialize value, type, action, data
     @value, @type, @action, @data =  value, type, action, data

@@ -21,16 +21,23 @@
         Swap Sources
   .row
     .col-lg-6
-
-      - OntologyChange::TYPES.each do |change_type|
-        - changes =  @diff.changed_axioms.select{|change| change.type == change_type}.sort_by(&:value)
+      - OntologyChange::SINGLE_TYPES.each do |change_type|
+        - change =  @diff.send("#{change_type}_change")
+        - if change
+          %h3= label_text_change_type(change_type)
+          %a.change{style: "display:block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;", data: { toggle: "popover", html: "true", trigger: "hover", content: format_popover(change.data), placement: "bottom"}}
+            %font{color: style_helper(change.action)}
+              = h change.value
+            %br
+      - OntologyChange::SET_TYPES.each do |change_type|
+        - changes =  @diff.send("#{change_type}_changes").sort_by(&:value)
         - unless changes.empty?
           %h3= label_text_change_type(change_type)
 
           - changes.each do |change|
-            %a.change{style: "display:block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;", title: change.value, data: { toggle: "popover", html: "true", trigger: "hover", content: format_popover(change.data), placement: "bottom"}}
+            %a.change{style: "display:block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;", data: { toggle: "popover", html: "true", trigger: "hover", content: format_popover(change.data), placement: "bottom"}}
               %font{color: style_helper(change.action)}
-                &= change.value
+                = h change.value
               %br
     .col-lg-6
       %h3 New Entities

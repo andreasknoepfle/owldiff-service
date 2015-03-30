@@ -18,7 +18,7 @@ class ChangeMappingService
   def self.map change
 
     if change.is_a?(SetOntologyFormatData)
-      map_change(change,:ontology_format, :modified, change.get_new_format.to_string)
+      map_change(change,:format, :modified, change.get_new_format.to_string)
     elsif change.is_a?(AddPrefixData)
       map_change(change,:prefix, :added, {name: change.get_prefix_name, prefix: change.get_prefix})
     elsif change.is_a?(RemovePrefixData)
@@ -34,9 +34,9 @@ class ChangeMappingService
     elsif change.is_a?(RemoveImportData)
       map_change(change,:import, :removed, change.get_declaration.get_iri.to_string)
     elsif change.is_a?(AddOntologyAnnotationData)
-      map_change(change,:anotation_data, :added, object_data(change.get_annotation))
+      map_change(change,:annotation, :added, object_data(change.get_annotation))
     elsif change.is_a?(RemoveOntologyAnnotationData)
-      map_change(change,:anotation_data, :removed, object_data(change.get_annotation))
+      map_change(change,:annotation, :removed, object_data(change.get_annotation))
     elsif change.is_a?(AddAxiomData)
       map_change(change,:axiom, :added, object_data(change.get_axiom))
     elsif change.is_a?(RemoveAxiomData)
@@ -49,7 +49,7 @@ class ChangeMappingService
   private
 
   def self.map_change change, type, action, data
-    OntologyChange.new ChangeRenderService.render(change), type, action, data 
+    OntologyChange.new ChangeRenderService.render(change), type, action, data
   end
 
   def self.ontology_id_data change

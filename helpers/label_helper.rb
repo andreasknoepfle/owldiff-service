@@ -7,11 +7,11 @@ ACTION_TO_COLOR = {
 }
 
 LABEL_TEXT_MAPPING = {
-  ontology_format: "Ontology Format Changes",
+  format: "Ontology Format Changes",
   prefix: "Prefix Changes",
   ontology_id: "Ontology ID Changes",
   import: "Import Changes",
-  anotation_data: "Annotation Data Changes",
+  annotation: "Annotation Data Changes",
   axiom: "Axiom Changes"
 }
 
@@ -29,10 +29,13 @@ helpers do
   end
 
   def format_popover(data)
+    if data.is_a? String
+      return h(data)
+    end
     output = "<dl>"
     data.each do |k,v|
-      output += "<dt>#{Rack::Utils.escape_html(k.to_s)}</dt>"
-      output += "<dd style='word-wrap: break-word;'>#{Rack::Utils.escape_html(v.to_s)}</dd>"
+      output += "<dt>#{h(k.to_s)}</dt>"
+      output += "<dd style='word-wrap: break-word;'>#{h(v.to_s)}</dd>"
     end
     output += "</dl>"
     output
