@@ -1,42 +1,62 @@
-.row
-  - if @diff.binary_identical?
+- if @diff.binary_identical?
+  .row
     .col-lg-12
       .alert.alert-success(role="alert")
         The files are binary identical.
-  - else
+- else
+  .row
+    .col-lg-12
+      %dl.dl-horizontal
+        %dt
+          Parent Ontology:
+        %dd
+          = params[:owl1_url]
+        %dt
+          Child Ontology:
+        %dd
+          = params[:owl2_url]
+
+      %a.btn.btn-primary{href: "/diff?owl1_url=#{URI.encode(params[:owl2_url])}&owl2_url=#{URI.encode(params[:owl1_url])}"}
+        %span.glyphicon.glyphicon-refresh
+        Swap Sources
+  .row
     .col-lg-6
-      %h2 Changes
+
       - OntologyChange::TYPES.each do |change_type|
-        %h3= change_type.to_s
-        - @diff.changed_axioms.select{|change| change.type == change_type}.each do |change|
-          %span.label{}
-            &= change.value
+        - changes =  @diff.changed_axioms.select{|change| change.type == change_type}.sort_by(&:value)
+        - unless changes.empty?
+          %h3= label_text_change_type(change_type)
+
+          - changes.each do |change|
+            %a.change{style: "display:block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;", title: change.value, data: { toggle: "popover", html: "true", trigger: "hover", content: format_popover(change.data), placement: "bottom"}}
+              %font{color: style_helper(change.action)}
+                &= change.value
+              %br
     .col-lg-6
-      Entities
-      %ul
-        - @diff.entities.each do |entity|
-          %li
+      %h3 New Entities
+      = @diff.new_entities.each do |entity|
+        .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
+          %font{color: "green"}
             = ShortFormService.shorten entity
-      New Entities
-      %ul
-        = @diff.new_entities.each do |entity|
-          %li
+      %h3 Modified Entities
+      = @diff.modified_entities.each do |entity|
+        .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
+          %font{color: "blue"}
             = ShortFormService.shorten entity
-      Modified Entities
-      %ul
-        = @diff.modified_entities.each do |entity|
-          %li
+      %h3 Removed Entities
+      = @diff.removed_entities.each do |entity|
+        .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
+          %font{color: "red"}
             = ShortFormService.shorten entity
-      Removed Entities
-      %ul
-        = @diff.removed_entities.each do |entity|
-          %li
-            = ShortFormService.shorten entity
+
 .row
+
   .col-lg-6
+    %h3 Parent Ontology
     %pre
 
       &= @o1.read
   .col-lg-6
+    %h3 Child Ontology
     %pre
       &= @o2.read

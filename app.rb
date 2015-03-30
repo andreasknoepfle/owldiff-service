@@ -4,11 +4,14 @@ require 'sinatra'
 require 'sinatra/reloader'
 require "haml"
 require 'java'
+require 'json'
 
 set :views, 'views'
 
 Dir["models/*.rb"].each { |file| load file }
 Dir["services/*.rb"].each { |file| load file }
+Dir["helpers/*.rb"].each {|file| load file}
+
 
 get '/' do
   haml :index
