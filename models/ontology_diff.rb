@@ -11,6 +11,8 @@ import 'owl2vcs.analysis.PrefixExtractor'
 require 'pry'
 
 class OntologyDiff
+  SET_TYPES = [:prefix,:import,:annotation,:axiom]
+  SINGLE_TYPES = [:format,:ontology_id]
 
   attr_reader :cs, :entities, :new_entities, :modified_entities, :removed_entities
 
@@ -34,7 +36,7 @@ class OntologyDiff
     prefixes.to_hash
   end
 
-  OntologyChange::SET_TYPES.each do |type|
+  SET_TYPES.each do |type|
     define_method("#{type}_changes") do
       @cs.send("#{type}_changes").map do |change|
         ChangeMappingService.map change
@@ -42,7 +44,7 @@ class OntologyDiff
     end
   end
 
-  OntologyChange::SINGLE_TYPES.each do |type|
+  SINGLE_TYPES.each do |type|
     define_method("#{type}_change") do
       change = @cs.send("#{type}_change")
       change ? ChangeMappingService.map(change) : nil
