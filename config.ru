@@ -1,5 +1,3 @@
-#\ -s puma
-# Require the necessary init.rb file
 require 'app'
 
 set :run, false
