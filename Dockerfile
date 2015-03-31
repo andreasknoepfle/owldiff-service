@@ -16,4 +16,4 @@ EXPOSE 4567
 
 # This will be run when you call "docker run..."
 
-CMD ["jruby","app.rb"]
+CMD ["jruby","app.rb","-s","Puma"]

@@ -12,7 +12,6 @@ end
 
 set :views, 'views'
 set :bind, '0.0.0.0'
-set :server, :puma
 
 Dir["models/*.rb"].each { |file| load file }
 Dir["services/*.rb"].each { |file| load file }
