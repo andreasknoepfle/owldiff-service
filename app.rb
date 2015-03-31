@@ -1,12 +1,18 @@
 # Require the necessary libraries.
 require 'rubygems'
 require 'sinatra'
-#require 'sinatra/reloader'
 require "haml"
 require 'java'
 require 'json'
 
+unless settings.production?
+  require 'sinatra/reloader'
+  require 'pry'
+end
+
 set :views, 'views'
+set :bind, '0.0.0.0'
+set :server, :puma
 
 Dir["models/*.rb"].each { |file| load file }
 Dir["services/*.rb"].each { |file| load file }

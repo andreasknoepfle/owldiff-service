@@ -8,7 +8,6 @@ import 'owl2vcs.analysis.EntityClassifier'
 import 'owl2vcs.changeset.FullChangeSet'
 import 'owl2vcs.utils.OntologyUtils'
 import 'owl2vcs.analysis.PrefixExtractor'
-require 'pry'
 
 class OntologyDiff
   SET_TYPES = [:prefix,:import,:annotation,:axiom]

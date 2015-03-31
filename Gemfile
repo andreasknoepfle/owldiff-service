@@ -4,12 +4,10 @@ ruby '1.9.3', engine: 'jruby', engine_version: '1.7.19'
 
 gem 'haml'
 gem 'sinatra'
-gem 'foreman'
-gem 'thin'
+gem 'puma'
 
-
-#gem 'pry'
-#gem 'sinatra-contrib'
-
-#gem 'puma'
-#gem 'warbler'
+group :test, :development do
+  gem 'pry'
+  gem 'sinatra-contrib'
+  gem 'warbler'
+end

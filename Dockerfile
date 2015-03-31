@@ -1,20 +1,19 @@
-FROM base
+FROM jruby
+ADD . /home/www
+WORKDIR /home/www
 
-# Install packages for building ruby
-RUN apt-get update
-RUN apt-get install -y --force-yes build-essential wget git
-RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
-RUN apt-get clean
+ENV RACK_ENV production
 
-RUN wget -P /root/src ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.gz
-RUN cd /root/src; tar xvf ruby-2.0.0-p247.tar.gz
-RUN cd /root/src/ruby-2.0.0-p247; ./configure; make install
+# Install bundler to handle gem dependencies
+RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 
-RUN gem update --system
-RUN gem install bundler
+RUN gem install bundler --no-ri --no-rdoc
 
-RUN git clone https://github.com/andreasknoeplfe/diff-service /root/sinatra
-RUN cd /root/sinatra; bundle install
+# install all gems required by the application
+RUN bundle install --without test development
 
 EXPOSE 4567
-CMD ["/usr/local/bin/foreman","start","-d","/root/sinatra"]
+
+# This will be run when you call "docker run..."
+
+CMD ["jruby","app.rb"]
