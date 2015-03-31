@@ -5,15 +5,15 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 
 ## Installation & Usage
 
-Method 1: Jruby
-====
+### Method 1: Jruby
+
 1. Install Jruby (very easy via RVM https://rvm.io/)
 2. Call `bundle install` from within the project directory
 3. `jruby app.rb`
 4. Visit `localhost:4567`
 
-Method 2: Docker
-====
+### Method 2: Docker
+
 1. Install Docker https://www.docker.com/
 2. Build Docker Image `sudo docker build -t diff_service .`
 3. Run it `sudo docker run -p 4567:4567 -it diff-service`
