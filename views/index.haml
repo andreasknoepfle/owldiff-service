@@ -9,3 +9,34 @@
           %label{:for => "exampleInputPassword1"} URL 2 (Child)
           %input#owl2.form-control(placeholder="http://example.com/testv2.owl" name="owl2_url")
         %button.btn.btn-default(type="submit") Compare
+
+      %h3 Some Examples
+      %dl
+        %dt
+          Simple:
+        %dd
+          %ul
+            %li
+              %a{href: "diff?owl1_url=https://raw.githubusercontent.com/andreasknoepfle/owldiff-service/master/samples/pizza_diff.owl&owl2_url=https://raw.githubusercontent.com/andreasknoepfle/owldiff-service/master/samples/pizzas.owl"}
+                Pizza Ontology
+        %dt
+          Interessting (real ontology data from api4kb):
+
+        %dd
+          %ul
+            %li
+              %a{href: "diff?owl1_url=https://raw.githubusercontent.com/API4KBs/api4kbs/2137cbc303e7f1bb4b1d9a94be30bf046fa02c7a/ontologies/API4KBTerminologyTry.rdf&owl2_url=https://raw.githubusercontent.com/API4KBs/api4kbs/currying/ontologies/API4KBTerminologyTry.rdf"}
+                Terminology Try Full History
+            %li
+              %a{href: "diff?owl1_url=https://raw.githubusercontent.com/API4KBs/api4kbs/af1ab3ee76eb2fad5ba0b29ebba9db2780ab0561/ontologies/API4KBTerminology.rdf&owl2_url=https://raw.githubusercontent.com/API4KBs/api4kbs/7ee74c795fdbd07d93db86d661c144a26cb05eb5/ontologies/API4KBTerminology.rdf"}
+                Terminology 2 commits
+        %dt
+          Complex(with format and prefix changes ):
+        %dd
+          %ul
+            %li
+              %a{href: "diff?owl1_url=https%3A%2F%2Fraw.githubusercontent.com%2FAPI4KBs%2Fapi4kbs%2F7ee74c795fdbd07d93db86d661c144a26cb05eb5%2Fontologies%2FAPI4KBTerminology.rdf&owl2_url=https%3A%2F%2Fraw.githubusercontent.com%2FAPI4KBs%2Fapi4kbs%2F66723310adfb4b2c5161b918bb108b7e7976c719%2Fontologies%2FAPI4KBTerminology.rdf"}
+                Terminology Full History
+            %li
+              %a{href: "/diff?owl1_url=https%3A%2F%2Fraw.githubusercontent.com%2FAPI4KBs%2Fapi4kbs%2F2a966ed9eca4024dbe56d0797a855c3cc4b70144%2Fontologies%2FAPI4KBTerminologyEvent.rdf&owl2_url=https%3A%2F%2Fraw.githubusercontent.com%2Fandreasknoepfle%2Fowldiff-service%2Fmaster%2Fsamples%2Fpizzas.owl"}
+                Terminology vs Pizza
