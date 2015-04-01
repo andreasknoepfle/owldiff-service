@@ -14,39 +14,80 @@ import 'owl2vcs.changes.SetOntologyFormatData'
 
 
 class ChangeMappingService
+  
+  MAPPINGS = {   SetOntologyFormatData: :map_set_ontology_format,
+                 AddPrefixData: :map_add_prefix,
+                 RemovePrefixData: :map_remove_prefix,
+                 ModifyPrefixData: :map_modify_prefix,
+                 RenamePrefixData: :map_rename_prefix,
+                 SetOntologyIDData: :map_set_ontology_id,
+                 AddImportData: :map_add_import,
+                 RemoveImportData: :map_remove_import,
+                 AddOntologyAnnotationData: :map_add_ontology_annotation,
+                 RemoveOntologyAnnotationData: :map_remove_ontology_annotation,
+                 AddAxiomData: :map_add_axiom,
+                 RemoveAxiomData: :map_remove_axiom
+  }
 
   def self.map change
-
-    if change.is_a?(SetOntologyFormatData)
-      map_change(change,:format, :modified, change.get_new_format.to_string)
-    elsif change.is_a?(AddPrefixData)
-      map_change(change,:prefix, :added, {name: change.get_prefix_name, prefix: change.get_prefix})
-    elsif change.is_a?(RemovePrefixData)
-      map_change(change,:prefix, :removed, {name: change.get_prefix_name, prefix: change.get_prefix})
-    elsif change.is_a?(ModifyPrefixData)
-      map_change(change,:prefix, :modified, {name: change.get_prefix_name,  prefix: change.get_prefix, old_prefix: change.get_old_prefix})
-    elsif change.is_a?(RenamePrefixData)
-      map_change(change,:prefix, :renamed, {name: change.get_prefix_name, prefix: change.get_prefix, old_name: change.get_old_prefix_name})
-    elsif change.is_a?(SetOntologyIDData)
-      map_change(change,:ontology_id, :modified, ontology_id_data(change))
-    elsif change.is_a?(AddImportData)
-      map_change(change,:import, :added, change.get_declaration.get_iri.to_string)
-    elsif change.is_a?(RemoveImportData)
-      map_change(change,:import, :removed, change.get_declaration.get_iri.to_string)
-    elsif change.is_a?(AddOntologyAnnotationData)
-      map_change(change,:annotation, :added, object_data(change.get_annotation))
-    elsif change.is_a?(RemoveOntologyAnnotationData)
-      map_change(change,:annotation, :removed, object_data(change.get_annotation))
-    elsif change.is_a?(AddAxiomData)
-      map_change(change,:axiom, :added, object_data(change.get_axiom))
-    elsif change.is_a?(RemoveAxiomData)
-      map_change(change,:axiom, :removed, object_data(change.get_axiom))
-    else
-      map_change(change,:unknown, :unknown, change.getClass().getName())
+    MAPPINGS.each do |k,v|
+      return self.send(v,change) if change.is_a? k 
     end
+   
+    map_change(change,:unknown, :unknown, change.getClass().getName())
   end
-
+  
+  
   private
+  
+  def self.map_set_ontology_format change
+    map_change(change,:format, :modified, change.get_new_format.to_string)
+  end
+  
+  def self.map_add_prefix change
+     map_change(change,:prefix, :added, {name: change.get_prefix_name, prefix: change.get_prefix})
+  end
+  
+  def self.map_remove_prefix change
+    map_change(change,:prefix, :removed, {name: change.get_prefix_name, prefix: change.get_prefix})
+  end
+  
+  def self.map_modify_prefix change
+    map_change(change,:prefix, :modified, {name: change.get_prefix_name,  prefix: change.get_prefix, old_prefix: change.get_old_prefix})
+  end   
+      
+  def self.map_rename_prefix change
+    map_change(change,:prefix, :renamed, {name: change.get_prefix_name, prefix: change.get_prefix, old_name: change.get_old_prefix_name})
+  end
+  
+  def self.map_set_ontology_id change
+    map_change(change,:ontology_id, :modified, ontology_id_data(change))
+  end
+  
+  def self.map_add_import change
+      map_change(change,:import, :added, change.get_declaration.get_iri.to_string)
+  end
+  
+  def self.map_remove_import change
+    map_change(change,:import, :removed, change.get_declaration.get_iri.to_string)
+  end
+  
+  def self.map_add_ontology_annotation change
+    map_change(change,:annotation, :added, object_data(change.get_annotation))
+  end
+  
+  def self.map_remove_ontology_annotation change
+    map_change(change,:annotation, :removed, object_data(change.get_annotation))
+  end
+  
+  def self.map_add_axiom change
+    map_change(change,:axiom, :added, object_data(change.get_axiom))
+  end
+  
+  def self.map_remove_axiom change
+    map_change(change,:axiom, :removed, object_data(change.get_axiom))
+  end
+  
 
   def self.map_change change, type, action, data
     OntologyChange.new ChangeRenderService.render(change), type, action, data
