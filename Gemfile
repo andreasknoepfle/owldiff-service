@@ -10,4 +10,7 @@ group :test, :development do
   gem 'pry'
   gem 'sinatra-contrib'
   gem 'warbler'
+  gem 'simplecov'
+  gem 'minitest'
+  gem 'rack-test'
 end

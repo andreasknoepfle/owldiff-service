@@ -27,14 +27,18 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-## History
+## Tests
 
-TODO: Write history
+Execute tests with
+`rake test`
 
-## Credits
 
-TODO: Write credits
+### Dismiss coverage warning
+`export JRUBY_OPTS="$JRUBY_OPTS --debug"`
+
+
+## Thanks to OWL2VCS
+
+https://github.com/utapyngo/owl2vcs
 
 ## License
-
-TODO: Write license
