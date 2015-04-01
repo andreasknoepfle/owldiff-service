@@ -1,4 +1,6 @@
 language: ruby
+jdk:
+  - openjdk7
 rvm:
   - jruby-19mode
 env:
