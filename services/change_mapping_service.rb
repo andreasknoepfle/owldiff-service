@@ -15,29 +15,27 @@ import 'owl2vcs.changes.SetOntologyFormatData'
 
 class ChangeMappingService
   
-  MAPPINGS = {   SetOntologyFormatData: :map_set_ontology_format,
-                 AddPrefixData: :map_add_prefix,
-                 RemovePrefixData: :map_remove_prefix,
-                 ModifyPrefixData: :map_modify_prefix,
-                 RenamePrefixData: :map_rename_prefix,
-                 SetOntologyIDData: :map_set_ontology_id,
-                 AddImportData: :map_add_import,
-                 RemoveImportData: :map_remove_import,
-                 AddOntologyAnnotationData: :map_add_ontology_annotation,
-                 RemoveOntologyAnnotationData: :map_remove_ontology_annotation,
-                 AddAxiomData: :map_add_axiom,
-                 RemoveAxiomData: :map_remove_axiom
+  MAPPINGS = {   SetOntologyFormatData => :map_set_ontology_format,
+                 AddPrefixData =>  :map_add_prefix,
+                 RemovePrefixData =>  :map_remove_prefix,
+                 ModifyPrefixData =>  :map_modify_prefix,
+                 RenamePrefixData =>  :map_rename_prefix,
+                 SetOntologyIDData =>  :map_set_ontology_id,
+                 AddImportData =>  :map_add_import,
+                 RemoveImportData =>  :map_remove_import,
+                 AddOntologyAnnotationData =>  :map_add_ontology_annotation,
+                 RemoveOntologyAnnotationData => :map_remove_ontology_annotation,
+                 AddAxiomData =>  :map_add_axiom,
+                 RemoveAxiomData => :map_remove_axiom
   }
 
   def self.map change
     MAPPINGS.each do |k,v|
       return self.send(v,change) if change.is_a? k 
     end
-   
     map_change(change,:unknown, :unknown, change.getClass().getName())
   end
-  
-  
+
   private
   
   def self.map_set_ontology_format change

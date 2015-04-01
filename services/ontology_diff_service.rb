@@ -33,31 +33,39 @@ class OntologyDiffService
   def diff
     diff = OntologyDiff.new(binary_identical?)
     return diff if binary_identical?
+    map_set_types diff
+    map_single_types diff
+    map_entities diff
+    diff
+  end
 
-    OntologyDiff::SET_CHANGE_TYPES.each do |type|
+  private
+  
+  def map_set_types diff
+     OntologyDiff::SET_CHANGE_TYPES.each do |type|
       set = @cs.send("#{type}_changes").map do |change|
         ChangeMappingService.map change
       end
       diff.send "#{type}_changes=", set
     end
-
+  end
+  
+  def map_single_types diff
     OntologyDiff::SINGLE_CHANGE_TYPES.each do |type|
       change = @cs.send("#{type}_change")
       mapped_change = change ? ChangeMappingService.map(change) : nil
       diff.send "#{type}_change=",  mapped_change
     end
-
+  end
+  
+  def map_entities diff
     OntologyDiff::ENTITIES.each do |entity_type|
       set = self.send("#{entity_type}_entities").map do |entity|
         OntologyEntity.new(ShortFormService.shorten(entity),entity.to_string)
       end
       diff.send "#{entity_type}_entities=",  set
     end
-
-    diff
   end
-
-  private
 
   def binary_identical?
     @binary_identical ||= Diff.binary_compare_sources @source1, @source2
