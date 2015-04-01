@@ -1,5 +1,6 @@
 # OWL Diff Service
 
+[![Build Status](https://travis-ci.org/andreasknoepfle/owldiff-service.svg?branch=master)](https://travis-ci.org/andreasknoepfle/owldiff-service) [![Code Climate](https://codeclimate.com/github/andreasknoepfle/owldiff-service/badges/gpa.svg)](https://codeclimate.com/github/andreasknoepfle/owldiff-service) [![Test Coverage](https://codeclimate.com/github/andreasknoepfle/owldiff-service/badges/coverage.svg)](https://codeclimate.com/github/andreasknoepfle/owldiff-service)
 A small webservice written in jruby, that uses the owl2vcs jar (https://github.com/utapyngo/owl2vcs) to create a structural diff between two ontologies hosted online.
 This service was build to integrate the owl2vcs diff in a gitlab installation.
 
