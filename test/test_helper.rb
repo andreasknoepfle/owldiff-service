@@ -1,16 +1,16 @@
 ENV['RACK_ENV'] = 'test'
 
-require 'simplecov'
+if ENV['CI']
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require 'simplecov'
+  SimpleCov.start
+end
 
-SimpleCov.start
-
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
+require 'rack/test'
 require 'minitest'
 require "minitest/autorun"
 require "minitest/pride"
-require 'rack/test'
-
-
-require_relative '../app.rb'
+require 'mocha/mini_test'
+require 'app'

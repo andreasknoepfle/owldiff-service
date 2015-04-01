@@ -21,7 +21,7 @@
         Swap Sources
   .row
     .col-lg-6
-      - OntologyDiff::SINGLE_TYPES.each do |change_type|
+      - OntologyDiff::SINGLE_CHANGE_TYPES.each do |change_type|
         - change =  @diff.send("#{change_type}_change")
         - if change
           %h3= label_text_change_type(change_type)
@@ -29,7 +29,7 @@
             %font{color: style_helper(change.action)}
               = h change.value
             %br
-      - OntologyDiff::SET_TYPES.each do |change_type|
+      - OntologyDiff::SET_CHANGE_TYPES.each do |change_type|
         - changes =  @diff.send("#{change_type}_changes").sort_by(&:value)
         - unless changes.empty?
           %h3= label_text_change_type(change_type)
@@ -41,20 +41,20 @@
               %br
     .col-lg-6
       %h3 New Entities
-      = @diff.new_entities.each do |entity|
+      - @diff.new_entities.each do |entity|
         .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
           %font{color: "green"}
-            = ShortFormService.shorten entity
+            = entity.short
       %h3 Modified Entities
-      = @diff.modified_entities.each do |entity|
+      - @diff.modified_entities.each do |entity|
         .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
           %font{color: "blue"}
-            = ShortFormService.shorten entity
+            = entity.short
       %h3 Removed Entities
-      = @diff.removed_entities.each do |entity|
+      - @diff.removed_entities.each do |entity|
         .change{style: "text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"}
           %font{color: "red"}
-            = ShortFormService.shorten entity
+            = entity.short
 
 .row
 
