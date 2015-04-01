@@ -4,7 +4,7 @@ class DiffTest < Minitest::Test
   include Rack::Test::Methods
 
   def test_ontology_diff
-    diff = OntologyDiffService.new("samples/api4kb1.rdf", "samples/pizzas.owl")
+    diff = OntologyDiffService.new("samples/api4kb1.rdf", "samples/pizzas.owl").diff
     assert !diff.binary_identical?
   end
 
