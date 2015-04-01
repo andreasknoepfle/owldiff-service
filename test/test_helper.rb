@@ -4,6 +4,9 @@ require 'simplecov'
 
 SimpleCov.start
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'minitest'
 require "minitest/autorun"
 require "minitest/pride"

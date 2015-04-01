@@ -13,4 +13,5 @@ group :test, :development do
   gem 'simplecov'
   gem 'minitest'
   gem 'rack-test'
+  gem 'codeclimate-test-reporter'
 end

@@ -32,7 +32,6 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 Execute tests with
 `rake test`
 
-
 ### Dismiss coverage warning
 `export JRUBY_OPTS="$JRUBY_OPTS --debug"`
 
