@@ -40,30 +40,30 @@ class OntologyDiffService
   end
 
   private
-  
+
   def map_set_types diff
      OntologyDiff::SET_CHANGE_TYPES.each do |type|
-      set = @cs.send("#{type}_changes").map do |change|
+      set = @cs.send(type).map do |change|
         ChangeMappingService.map change
       end
-      diff.send "#{type}_changes=", set
+      diff.send "#{type}=", set
     end
   end
-  
+
   def map_single_types diff
     OntologyDiff::SINGLE_CHANGE_TYPES.each do |type|
-      change = @cs.send("#{type}_change")
+      change = @cs.send(type)
       mapped_change = change ? ChangeMappingService.map(change) : nil
-      diff.send "#{type}_change=",  mapped_change
+      diff.send "#{type}=",  mapped_change
     end
   end
-  
+
   def map_entities diff
     OntologyDiff::ENTITIES.each do |entity_type|
-      set = self.send("#{entity_type}_entities").map do |entity|
+      set = self.send(entity_type).map do |entity|
         OntologyEntity.new(ShortFormService.shorten(entity),entity.to_string)
       end
-      diff.send "#{entity_type}_entities=",  set
+      diff.send "#{entity_type}=",  set
     end
   end
 

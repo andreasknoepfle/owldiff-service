@@ -6,13 +6,13 @@ class OntologyChange
     @value, @type, @action, @data =  value, type, action, data
   end
 
-  def to_json
+  def to_json(*opts)
     {
       'value' => value,
       'type' => type.to_s,
       'action' => action.to_s,
       'data' => data
-    }
+    }.to_json(*opts)
   end
 
 end

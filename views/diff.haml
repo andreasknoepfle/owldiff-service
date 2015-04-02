@@ -22,7 +22,7 @@
   .row
     .col-lg-6
       - OntologyDiff::SINGLE_CHANGE_TYPES.each do |change_type|
-        - change =  @diff.send("#{change_type}_change")
+        - change =  @diff.send("#{change_type}")
         - if change
           %h3= label_text_change_type(change_type)
           %a.change{style: "display:block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;", data: { toggle: "popover", html: "true", trigger: "hover", content: format_popover(change.data), placement: "bottom"}}
@@ -30,7 +30,7 @@
               = h change.value
             %br
       - OntologyDiff::SET_CHANGE_TYPES.each do |change_type|
-        - changes =  @diff.send("#{change_type}_changes").sort_by(&:value)
+        - changes =  @diff.send("#{change_type}").sort_by(&:value)
         - unless changes.empty?
           %h3= label_text_change_type(change_type)
 

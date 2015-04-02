@@ -4,11 +4,11 @@ class OntologyEntity
     @short, @full = short, full
   end
 
-  def to_json
+  def to_json(*opts)
     {
       short: @short,
       full: @full
-    }
+    }.to_json(*opts)
   end
 
 end
