@@ -5,7 +5,9 @@ if ENV['CI']
   CodeClimate::TestReporter.start
 else
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter "test/*"
+  end
 end
 
 require 'rack/test'

@@ -3,8 +3,6 @@ require 'test/test_helper'
 class DiffTest < Minitest::Test
   include Rack::Test::Methods
 
-
-
   def test_ontology_diff
     diff = OntologyDiffService.new("samples/api4kb1.rdf", "samples/pizzas.owl").diff
     assert !diff.binary_identical?
@@ -25,6 +23,13 @@ class DiffTest < Minitest::Test
     diff = get_diff(:ontology_id_change)
     assert diff.ontology_id_change
     assert_equal "<http://www.semanticweb.org/test2>", diff.ontology_id_change.data[:ontology_iri]
+  end
+
+  def test_anonymous_ontology_id_change
+    diff =  get_diff(:ontology_id_change_anonymous)
+    assert diff.ontology_id_change
+    anonymous = {anonymous: true}
+    assert_equal anonymous, diff.ontology_id_change.data
   end
 
   def test_prefix_changes
@@ -73,6 +78,15 @@ class DiffTest < Minitest::Test
       assert change.data
       assert_equal [:short,:full], change.data.keys
     end
+  end
+
+  def test_unknown_change_type
+    service = OntologyDiffService.new("test/fixtures/axiom_changes_a.owl", "test/fixtures/axiom_changes_b.owl")
+    service.cs.stubs(:axiom_changes).returns(["This is not a axiom change object"])
+    unknown_change = service.diff.axiom_changes.first
+    assert_equal :unknown, unknown_change.type
+    assert_equal :unknown, unknown_change.action
+    assert_equal String.name, unknown_change.data
   end
 
   private

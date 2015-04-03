@@ -21,15 +21,6 @@ class OntologyDiffService
     generate_diff
   end
 
-  def format_changes
-    @format1 = @owl1.owl_ontology_manager.get_ontology_format @owl1
-    @format2 = @owl2.owl_ontology_manager.get_ontology_format @owl2
-    if @format1.prefix_owl_ontology_format? && @format2.prefix_owl_ontology_format?
-      prefixes = extract_prefixes @entities, @format1, @format2
-    end
-    prefixes.to_hash
-  end
-
   def diff
     diff = OntologyDiff.new(binary_identical?)
     return diff if binary_identical?
@@ -97,18 +88,24 @@ class OntologyDiffService
   end
 
 
+  # Uncomment if you need to include used prefixes to the diff
 
-  def extract_prefixes entities, format1, format2
-    all_prefixes = HashMap.new;
-    all_prefixes.put_all(format1.asPrefixOWLOntologyFormat
-                .getPrefixName2PrefixMap)
-    all_prefixes.put_all(format2.asPrefixOWLOntologyFormat
-                .getPrefixName2PrefixMap)
-    PrefixExtractor.new(entities, all_prefixes).getPrefixName2PrefixMap
-  end
-
-
-
-
+  # def extract_prefixes entities, format1, format2
+  #   all_prefixes = HashMap.new;
+  #   all_prefixes.put_all(format1.asPrefixOWLOntologyFormat
+  #               .getPrefixName2PrefixMap)
+  #   all_prefixes.put_all(format2.asPrefixOWLOntologyFormat
+  #               .getPrefixName2PrefixMap)
+  #   PrefixExtractor.new(entities, all_prefixes).getPrefixName2PrefixMap
+  # end
+  #
+  # def used_prefixes
+  #   @format1 = @owl1.owl_ontology_manager.get_ontology_format @owl1
+  #   @format2 = @owl2.owl_ontology_manager.get_ontology_format @owl2
+  #   if @format1.prefix_owl_ontology_format? && @format2.prefix_owl_ontology_format?
+  #     prefixes = extract_prefixes @entities, @format1, @format2
+  #   end
+  #   prefixes.to_hash
+  # end
 
 end

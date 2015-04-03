@@ -5,7 +5,7 @@ class AppTest < Minitest::Test
 
   def setup
     @sample1 = "samples/pizzas.owl"
-    @sample2 = "samples/pizza_diff.owl"
+    @sample2 = "samples/api4kb1.rdf"
     @url1 = "http://test.de/test1.owl"
     @url2 = "http://test.de/test2.owl"
     @sf1 = File.new(@sample1)
