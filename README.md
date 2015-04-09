@@ -17,7 +17,7 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 ### Method 2: Docker
 
 1. Install Docker https://www.docker.com/
-2. Build Docker Image `sudo docker build -t diff_service .`
+2. Build Docker Image `sudo docker build -t diff-service .`
 3. Run it `sudo docker run -p 4567:4567 -it diff-service`
 4. Visit `localhost:4567`
 
