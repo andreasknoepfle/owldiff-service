@@ -22,17 +22,24 @@ class AppTest < Minitest::Test
   end
 
   def test_diff_path
-    DownloadService.expects(:download_url).with(@url1).returns(@sf1)
-    DownloadService.expects(:download_url).with(@url2).returns(@sf2)
+    DownloadService.any_instance.expects(:download_url).with(@url1).returns(@sf1)
+    DownloadService.any_instance.expects(:download_url).with(@url2).returns(@sf2)
     get '/diff', owl1_url: @url1, owl2_url: @url2
     assert last_response.ok?
   end
 
   def test_json_diff
-    DownloadService.expects(:download_url).with(@url1).returns(@sf1)
-    DownloadService.expects(:download_url).with(@url2).returns(@sf2)
+    DownloadService.any_instance.expects(:download_url).with(@url1).returns(@sf1)
+    DownloadService.any_instance.expects(:download_url).with(@url2).returns(@sf2)
     get '/diff.json', owl1_url: @url1, owl2_url: @url2
     JSON.load last_response.body
+  end
+
+  def test_download_exception
+    url = "http://www.example.com/something.owl"
+    DownloadService.any_instance.stubs(:open).with(url,{:read_timeout => 10}).raises(Exception) # stub out the request
+    get '/diff.json', owl1_url: @url1, owl2_url: @url2
+    assert_equal 422, last_response.status
   end
 
 end
