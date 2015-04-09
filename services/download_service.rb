@@ -6,5 +6,7 @@ class DownloadService
     file << open(url).read
     file.rewind
     file
+  rescue
+    nil
   end
 end
