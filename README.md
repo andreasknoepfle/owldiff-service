@@ -56,3 +56,5 @@ Execute tests with
 https://github.com/utapyngo/owl2vcs
 
 ## License
+
+LGPL v3
