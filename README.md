@@ -45,7 +45,7 @@ https://peaceful-escarpment-8597.herokuapp.com/
 ## Tests
 
 Execute tests with
-`rake test`
+`ruby test.rb`
 
 ### Dismiss coverage warning
 `export JRUBY_OPTS="$JRUBY_OPTS --debug"`
