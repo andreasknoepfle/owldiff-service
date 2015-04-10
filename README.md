@@ -21,6 +21,19 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 3. Run it `sudo docker run -p 4567:4567 -it diff-service`
 4. Visit `localhost:4567`
 
+### Method 3: WAR File
+
+1. Install Jruby (s.o.)
+2. Call `bundle install`
+3. Call `warble`
+4. Copy the created WAR-Archive to any Java Application Server Container (e.g. Jetty)
+
+## Demo
+
+A Demo runs on heroku
+
+https://peaceful-escarpment-8597.herokuapp.com/
+
 ## Contributing
 
 1. Fork it!
