@@ -1,7 +1,4 @@
-bind: "0.0.0.0" # Address the service is bound to
-
 # Settings for the download of the owl files
-
 download:
   timeout: 10 # in seconds
   allowed_hosts: ["gitlab.com","localhost","raw.githubusercontent.com"]
