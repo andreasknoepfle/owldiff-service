@@ -3,6 +3,7 @@ ADD . /home/www
 WORKDIR /home/www
 
 ENV RACK_ENV production
+ENV NO_HOST_CHECK 1
 
 # Install bundler to handle gem dependencies
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc

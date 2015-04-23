@@ -21,7 +21,7 @@ class DownloadService
 
   def check_url url
     uri = URI.parse url
-    check_host uri.host
+    check_host uri.host unless ENV["NO_HOST_CHECK"]
     check_extension uri.path
   end
 

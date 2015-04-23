@@ -10,9 +10,10 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 ### Method 1: Jruby
 
 1. Install Jruby (very easy via RVM https://rvm.io/)
-2. Call `bundle install` from within the project directory
-3. `jruby app.rb`
-4. Visit `localhost:4567`
+2. Install bundler `gem install bundler`
+3. Call `bundle install` from within the project directory
+4. `jruby app.rb`
+5. Visit `localhost:4567`
 
 ### Method 2: Docker
 
@@ -24,9 +25,10 @@ This service was build to integrate the owl2vcs diff in a gitlab installation.
 ### Method 3: WAR File
 
 1. Install Jruby (s.o.)
-2. Call `bundle install`
-3. Call `warble`
-4. Copy the created WAR-Archive to any Java Application Server Container (e.g. Jetty)
+2. Install bundler `gem install bundler`
+3. Call `bundle install`
+4. Call `warble`
+5. Copy the created WAR-Archive to any Java Application Server Container (e.g. Jetty)
 
 ## Demo
 
