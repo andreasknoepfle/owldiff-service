@@ -1,4 +1,4 @@
-# OWL Diff Service
+# Owldiff Service
 
 [![Build Status](https://travis-ci.org/andreasknoepfle/owldiff-service.svg?branch=master)](https://travis-ci.org/andreasknoepfle/owldiff-service) [![Code Climate](https://codeclimate.com/github/andreasknoepfle/owldiff-service/badges/gpa.svg)](https://codeclimate.com/github/andreasknoepfle/owldiff-service) [![Test Coverage](https://codeclimate.com/github/andreasknoepfle/owldiff-service/badges/coverage.svg)](https://codeclimate.com/github/andreasknoepfle/owldiff-service)
 
