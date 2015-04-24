@@ -1,4 +1,4 @@
-import 'owl2vcs.render.FunctionalChangeRenderer'
+java_import 'owl2vcs.render.FunctionalChangeRenderer'
 require 'singleton'
 
 class ChangeRenderService

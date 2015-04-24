@@ -9,7 +9,7 @@ else
     add_filter "test/*"
   end
 end
-
+require 'java'
 require 'rack/test'
 require 'minitest'
 require "minitest/autorun"

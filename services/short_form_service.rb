@@ -1,7 +1,7 @@
 require 'singleton'
-import 'org.semanticweb.owlapi.util.SimpleShortFormProvider'
-import 'owl2vcs.render.SimplerRenderer'
-import 'owl2vcs.render.FullFormProvider'
+java_import 'org.semanticweb.owlapi.util.SimpleShortFormProvider'
+java_import 'owl2vcs.render.SimplerRenderer'
+java_import 'owl2vcs.render.FullFormProvider'
 
 class ShortFormService
   include Singleton

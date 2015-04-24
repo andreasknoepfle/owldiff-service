@@ -1,13 +1,12 @@
-
-import 'org.semanticweb.owlapi.io.FileDocumentSource'
-import 'owl2vcs.tools.Diff'
-import 'java.util.HashSet'
-import 'java.util.HashMap'
-import 'owl2vcs.analysis.EntityCollector'
-import 'owl2vcs.analysis.EntityClassifier'
-import 'owl2vcs.changeset.FullChangeSet'
-import 'owl2vcs.utils.OntologyUtils'
-import 'owl2vcs.analysis.PrefixExtractor'
+java_import 'org.semanticweb.owlapi.io.FileDocumentSource'
+java_import 'owl2vcs.tools.Diff'
+java_import 'java.util.HashSet'
+java_import 'java.util.HashMap'
+java_import 'owl2vcs.analysis.EntityCollector'
+java_import 'owl2vcs.analysis.EntityClassifier'
+java_import 'owl2vcs.changeset.FullChangeSet'
+java_import 'owl2vcs.utils.OntologyUtils'
+java_import 'owl2vcs.analysis.PrefixExtractor'
 
 class OntologyDiffService
 
@@ -22,7 +21,7 @@ class OntologyDiffService
   end
 
   def diff
-    diff = OntologyDiff.new(binary_identical?)
+    diff = Owldiff::OntologyDiff.new(binary_identical?)
     return diff if binary_identical?
     map_set_types diff
     map_single_types diff
@@ -33,7 +32,7 @@ class OntologyDiffService
   private
 
   def map_set_types diff
-     OntologyDiff::SET_CHANGE_TYPES.each do |type|
+    Owldiff::OntologyDiff::SET_CHANGE_TYPES.each do |type|
       set = @cs.send(type).map do |change|
         ChangeMappingService.map change
       end
@@ -42,7 +41,7 @@ class OntologyDiffService
   end
 
   def map_single_types diff
-    OntologyDiff::SINGLE_CHANGE_TYPES.each do |type|
+    Owldiff::OntologyDiff::SINGLE_CHANGE_TYPES.each do |type|
       change = @cs.send(type)
       mapped_change = change ? ChangeMappingService.map(change) : nil
       diff.send "#{type}=",  mapped_change
@@ -50,9 +49,9 @@ class OntologyDiffService
   end
 
   def map_entities diff
-    OntologyDiff::ENTITIES.each do |entity_type|
+    Owldiff::OntologyDiff::ENTITIES.each do |entity_type|
       set = self.send(entity_type).map do |entity|
-        OntologyEntity.new(ShortFormService.shorten(entity),entity.to_string)
+        Owldiff::OntologyEntity.new(ShortFormService.shorten(entity),entity.to_string)
       end
       diff.send "#{entity_type}=",  set
     end

@@ -21,7 +21,7 @@
         Swap Sources
   .row
     .col-lg-6
-      - OntologyDiff::SINGLE_CHANGE_TYPES.each do |change_type|
+      - Owldiff::OntologyDiff::SINGLE_CHANGE_TYPES.each do |change_type|
         - change =  @diff.send("#{change_type}")
         - if change
           %h3= label_text_change_type(change_type)
@@ -29,7 +29,7 @@
             %font{color: style_helper(change.action)}
               = h change.value
             %br
-      - OntologyDiff::SET_CHANGE_TYPES.each do |change_type|
+      - Owldiff::OntologyDiff::SET_CHANGE_TYPES.each do |change_type|
         - changes =  @diff.send("#{change_type}").sort_by(&:value)
         - unless changes.empty?
           %h3= label_text_change_type(change_type)

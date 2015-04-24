@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require_relative 'minitest_helper'
 
 class DiffTest < Minitest::Test
   include Rack::Test::Methods
@@ -14,7 +14,7 @@ class DiffTest < Minitest::Test
     diff = get_diff(:format_change)
     assert diff.format_change
     assert_equal "OWL/XML", diff.format_change.data
-    OntologyDiff::SET_CHANGE_TYPES.each do |type|
+    Owldiff::OntologyDiff::SET_CHANGE_TYPES.each do |type|
       assert_empty diff.send(type)
     end
   end
@@ -36,7 +36,7 @@ class DiffTest < Minitest::Test
     diff = get_diff(:prefix_changes)
     assert diff.prefix_changes
     assert_equal 4, diff.prefix_changes.size # 4 instances
-    assert_equal OntologyChange::ACTIONS.sort, diff.prefix_changes.map(&:action).sort # all change type detected once
+    assert_equal Owldiff::OntologyChange::ACTIONS.sort, diff.prefix_changes.map(&:action).sort # all change type detected once
     diff.prefix_changes.each do |change|
       assert_equal :prefix, change.type # only prefix changes
       assert change.data

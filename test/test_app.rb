@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require_relative 'minitest_helper'
 
 class AppTest < Minitest::Test
   include Rack::Test::Methods

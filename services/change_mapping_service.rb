@@ -1,16 +1,16 @@
-import 'org.semanticweb.owlapi.change.AddAxiomData'
-import 'org.semanticweb.owlapi.change.AddImportData'
-import 'org.semanticweb.owlapi.change.AddOntologyAnnotationData'
-import 'org.semanticweb.owlapi.change.OWLOntologyChangeData'
-import 'org.semanticweb.owlapi.change.RemoveAxiomData'
-import 'org.semanticweb.owlapi.change.RemoveImportData'
-import 'org.semanticweb.owlapi.change.RemoveOntologyAnnotationData'
-import 'org.semanticweb.owlapi.change.SetOntologyIDData'
-import 'owl2vcs.changes.AddPrefixData'
-import 'owl2vcs.changes.ModifyPrefixData'
-import 'owl2vcs.changes.RemovePrefixData'
-import 'owl2vcs.changes.RenamePrefixData'
-import 'owl2vcs.changes.SetOntologyFormatData'
+java_import 'org.semanticweb.owlapi.change.AddAxiomData'
+java_import 'org.semanticweb.owlapi.change.AddImportData'
+java_import 'org.semanticweb.owlapi.change.AddOntologyAnnotationData'
+java_import 'org.semanticweb.owlapi.change.OWLOntologyChangeData'
+java_import 'org.semanticweb.owlapi.change.RemoveAxiomData'
+java_import 'org.semanticweb.owlapi.change.RemoveImportData'
+java_import 'org.semanticweb.owlapi.change.RemoveOntologyAnnotationData'
+java_import 'org.semanticweb.owlapi.change.SetOntologyIDData'
+java_import 'owl2vcs.changes.AddPrefixData'
+java_import 'owl2vcs.changes.ModifyPrefixData'
+java_import 'owl2vcs.changes.RemovePrefixData'
+java_import 'owl2vcs.changes.RenamePrefixData'
+java_import 'owl2vcs.changes.SetOntologyFormatData'
 
 
 class ChangeMappingService
@@ -33,7 +33,7 @@ class ChangeMappingService
     MAPPINGS.each do |k,v|
       return self.send(v,change) if change.is_a? k
     end
-    OntologyChange.new("Unknown",:unknown, :unknown, change.class.name)
+    Owldiff::OntologyChange.new("Unknown",:unknown, :unknown, change.class.name)
   end
 
   private
@@ -88,7 +88,7 @@ class ChangeMappingService
 
 
   def self.map_change change, type, action, data
-    OntologyChange.new ChangeRenderService.render(change), type, action, data
+    Owldiff::OntologyChange.new ChangeRenderService.render(change), type, action, data
   end
 
   def self.ontology_id_data change

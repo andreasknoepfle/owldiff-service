@@ -6,6 +6,7 @@ gem 'haml'
 gem 'sinatra'
 gem 'puma'
 gem 'sinatra-contrib'
+gem 'owldiff'
 
 group :test, :development do
   gem 'pry'

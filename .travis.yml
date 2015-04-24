@@ -5,7 +5,6 @@ rvm:
   - jruby-19mode
 env:
   - JRUBY_OPTS="--debug"
-script: "bundle exec ruby test.rb"
 addons:
   code_climate:
     repo_token: 165d4df5627fb2d56b21f5fc0c53ae2799142df3c7e37b604e8529c55cba8aae

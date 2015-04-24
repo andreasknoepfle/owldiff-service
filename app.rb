@@ -1,11 +1,13 @@
 # Require the necessary libraries.
 require 'rubygems'
+require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/config_file'
 require 'haml'
 require 'java'
 require 'json'
 require 'lib/owl2vcs.jar'
+require 'owldiff'
 
 unless settings.production?
   require 'sinatra/reloader'
@@ -14,7 +16,6 @@ end
 
 config_file 'config/application.yml'
 
-Dir["models/*.rb"].each { |file| load file }
 Dir["services/*.rb"].each { |file| load file }
 Dir["helpers/*.rb"].each {|file| load file}
 
