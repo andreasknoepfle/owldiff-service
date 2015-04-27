@@ -7,12 +7,12 @@ ACTION_TO_COLOR = {
 }
 
 LABEL_TEXT_MAPPING = {
-  format: "Ontology Format Changes",
-  prefix: "Prefix Changes",
-  ontology_id: "Ontology ID Changes",
-  import: "Import Changes",
-  annotation: "Annotation Data Changes",
-  axiom: "Axiom Changes"
+  format_change: "Ontology Format Changes",
+  prefix_changes: "Prefix Changes",
+  ontology_id_change: "Ontology ID Changes",
+  import_changes: "Import Changes",
+  annotation_changes: "Annotation Data Changes",
+  axiom_changes: "Axiom Changes"
 }
 
 helpers do
