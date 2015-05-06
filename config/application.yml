@@ -1,5 +1,5 @@
 # Settings for the download of the owl files
 download:
-  timeout: 10 # in seconds
+  timeout: 60 # in seconds
   allowed_hosts: ["gitlab.com","localhost","raw.githubusercontent.com"]
   allowed_extensions: [".ttl",".owl",".rdf"]
