@@ -1,4 +1,4 @@
-FROM jruby
+FROM jruby:1.7.19
 ADD . /home/www
 WORKDIR /home/www
 
